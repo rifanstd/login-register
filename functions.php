@@ -14,7 +14,7 @@ function register($data){
 
 	// cek if there is exist username in database
 	$cekUsernameExist = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
-	if (mysqli_fetch_row($cekUsernameExist)) {
+	if (mysqli_fetch_row($cekUsernameExist) != NULL) {
 		return 0;
 	}
 
@@ -35,6 +35,31 @@ function register($data){
 	mysqli_query($conn, "INSERT INTO users VALUES('', '$username', '$password')");
 
 	return mysqli_affected_rows($conn);
+}
+
+// Function Login
+function login($data){
+	global $conn;
+
+	$username = $data['username'];
+	$password = $data['password'];
+
+	$cekUsernameExist = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+
+	// verify username
+	if (($row = mysqli_fetch_assoc($cekUsernameExist))) {
+
+		//verify password
+		if (password_verify($password, $row["password"])) {
+			return 1;
+		}
+		else {
+			return -1;
+		}
+	}
+	else {
+		return 0;
+	}
 }
 
 

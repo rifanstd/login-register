@@ -20,7 +20,10 @@ require 'functions.php';
 
     <!-- Register -->
     <div class="container mt-5" style="max-width: 500px">
-        <div class="row justify-content-center">
+        <div class="row text-center">
+            <h1>Login</h1>
+        </div>
+        <div class="row">
             <div class="col-md">
                 <form action="" method="post">
                     <div class="mb-3">
